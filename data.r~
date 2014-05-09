@@ -1,0 +1,7 @@
+require(data.table);require(dplyr);require(RPostgreSQL)
+
+vars <- sapply(list.files('data')[1:4], function(x) substr(x, 1, nchar(x)-4))
+lapply(vars,function(x) assign(x, fread(paste('data/',x,'.csv',sep='')), envir=.GlobalEnv))
+
+drv <- dbDriver('PostgreSQL')
+con <- dbConnect(drv, host='192.168.1.7', port=5432, user='postgres', password='zaqxsw', dbname='kaggle_valued_shoppers')
